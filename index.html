@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>使用示例</title>
+    <link rel="stylesheet" type="text/css" href="css/component.css">
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/component.js"></script>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .panel {
+        width: 900px;
+        margin: 20px auto;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    h2 {
+        margin: 30px 0 20px 0;
+        padding: 3px 10px;
+        border-left: 5px solid #1b809e
+    }
+
+    p {
+        padding: 10px;
+    }
+
+    pre {
+        display: block;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+        color: #333;
+        word-break: break-all;
+        word-wrap: break-word;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .highlight pre {
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        word-break: normal;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+    }
+
+    button {
+        padding: 5px 15px;
+        color: #fff;
+        background-color: #5bc0de;
+        border-color: #46b8da;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        cursor: pointer;
+        outline: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="panel panel-default">
+        <div class="panel-body demo-layout">
+            <h1>组件使用示例</h1>
+            <h2>1.loading</h2>
+            <p>基本调用</p>
+            <pre><code language="javascript">$.loading();// 直接传入"show"或是"hide",会分别调用show和hide方法</code></pre>
+            <p>参数</p>
+            <pre><code language="javascript">$.loading({ content:'This is loading text'});// loading 文字，默认是“加载中...”; </code></pre>
+            <p>示例</p>
+            <button onclick="showLoading()">点击弹出</button>
+            <script type="text/javascript">
+            function showLoading() {
+                $.loading();
+            }
+            </script>
+            <h2>2.弹出框</h2>
+            <p>基本调用</p>
+            <pre><code language="javascript">$.dialog({
+            title: "Dialog",
+            content: "This is A Dialog",
+            action: function() {
+                console.log("action")
+            }
+    });</code></pre>
+            <p>参数</p>
+            <pre><code language="javascript">$.dialog({
+        title: "Dialog", // 标题
+        content:'This is loading text', // 内容
+        button: {
+                action: '确认', // 按钮文字
+                dismis: '取消'
+            },
+        select: 'action', // 高亮的按钮
+        dismis: function() {}, // 取消按钮回调
+        action: function() {}  // 确认按钮回调
+    });
+        </code></pre>
+            <p>示例</p>
+            <button onclick="showDialog()">点击弹出</button>
+            <script type="text/javascript">
+            function showDialog() {
+                $.dialog({
+                    title: "确认框",
+                    content: "确认框内容"
+                });
+            }
+            </script>
+            <h2>3.提示框</h2>
+            <p>基本调用</p>
+            <pre><code language="javascript">$.tips("This is tips text");</code></pre>
+            <p>参数</p>
+            <pre><code language="javascript">$.tips({
+        content: '', // 内容
+        stayTime: 3000, // 消失时间
+        type: 'warning', // 提示类型，可选warning|danger
+        callback: function() {} // 提示框消失后回调
+    });
+        </code></pre>
+            <p>示例</p>
+            <button onclick="showTips()">点击弹出</button>
+            <script type="text/javascript">
+            function showTips() {
+                $.tips("Hello Word!!");
+            }
+            </script>
+            <h2>4.模态框</h2>
+            <p>模版</p>
+            <pre><code language="html">&lt;script type="text/template" class="J-modal"&gt;
+    &lt;div class="modal modal-layout"&gt;
+        &lt;div class="modal-dialog"&gt;
+            &lt;div class="modal-content"&gt;
+                &lt;div class="modal-header"&gt;
+                    &lt;button type="button" class="close"&gt;&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;
+                    &lt;h4 class="modal-title" id="myModalLabel"&gt;Modal title&lt;/h4&gt;
+                &lt;/div&gt;
+                &lt;div class="modal-body"&gt;
+                    &lt;p&gt;模态框主体&lt;/p&gt;&lt;
+                /div&gt;
+                &lt;div class="modal-footer"&gt;
+                    &lt;button type="button" class="btn btn-default J-canlce"&gt;Close&lt;/button&gt;
+                    &lt;button type="button" class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+     &lt;/div&gt;
+&lt;/script&gt;</code></pre>
+            <p>基本调用</p>
+            <pre><code language="javascript">var modal = $.Wimodal($('.J-modal').html(), function() {
+        var self = this,
+            $this = self.$this;
+        $this.find(".J-canlce").click(function() {
+            // some code
+        });
+    });
+    modal.show();</code></pre>
+            <p>参数</p>
+            <pre><code language="javascript">$.Wimodal(
+        $('.J-modal').html(), // 模态框模版
+        function() {
+            //something todo
+        });
+<br>
+// ps: 也可以通过以下方式调用：
+$(".J-modal").Wimodal(function() {
+    // something todo
+});</code></pre>
+            <p>示例</p>
+            <button onclick="showModal()">点击弹出</button>
+            <script type="text/templatr" class="J-modal">
+                <div class="modal-layout">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>点击Close关闭</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default J-canlce">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </script>
+            <script type="text/javascript">
+            function showModal() {
+                var modal = $.Wimodal($('.J-modal').html(), function() {
+                    var self = this,
+                        $this = self.$this;
+                    $this.find(".J-canlce").click(function() {
+                        modal.hide();
+                    });
+                });
+                modal.show();
+            }
+            </script>
+            <h2>5.回到顶部</h2>
+            <p>基本调用</p>
+            <pre><code language="javascript">$(".J-top").backTop();</code></pre>
+            <p>示例</p>
+            <button class="J-top">回到顶部</button>
+            <script>
+            $(".J-top").backTop();
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>

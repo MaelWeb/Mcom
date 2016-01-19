@@ -1,0 +1,36 @@
+/** loading **/
+.loading-layout {
+
+}
+.loading-bg {
+    z-index: 110;
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.01;
+    filter: alpha(opacity=1);
+}
+.loading {
+    z-index: 111;
+    height: 20px;
+    width: 120px;
+    padding: 40px 0 0 0;
+    text-align: center;
+    //position: absolute;
+    position: fixed;
+    left: 50%;
+    top: 30%;
+    margin-left: -60px;
+    box-shadow: 0 0 3px #8ecfdc;
+    background: url(../images/loading.gif) no-repeat center 5px #d9edf7;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+    font-size: 12px;
+    border-color: #acedfa;
+    //transition: all 0.5s ease-in 0.5s;
+}
